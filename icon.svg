@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="112" fill="#071a36"/>
+<path d="M116 348V164h54l92 99V164h54v184h-54l-92-99v99z" fill="#fff"/>
+<path d="M176 292l66-67 28 28 74-94 43 34-104 132-39-38-30 31z" fill="#f2bd4b"/>
+<text x="256" y="415" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="42" fill="#f2bd4b" letter-spacing="6">NEXORA</text>
+</svg>

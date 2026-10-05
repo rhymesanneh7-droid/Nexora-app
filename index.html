@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#071a36">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nexora">
+<title>Nexora Investments</title>
+<style>
+:root{--navy:#071a36;--navy2:#0d2a52;--gold:#f2bd4b;--gold2:#ffd875;--ink:#102544;--muted:#6b7a90;--bg:#f5f7fb;--white:#fff;--green:#16a36a;--red:#e45858;--line:#e7ebf2}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#dfe5ee;color:var(--ink)}
+button,input{font:inherit} button{cursor:pointer;border:0}
+.app{width:100%;max-width:430px;min-height:100vh;margin:auto;background:var(--bg);position:relative;overflow:hidden;box-shadow:0 0 30px #0002}
+.screen{display:none;min-height:100vh;padding-bottom:92px}.screen.active{display:block}
+.welcome{min-height:100vh;padding:48px 24px 28px;background:linear-gradient(180deg,#06172f 0%,#092b55 52%,#071a36 100%);color:#fff;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
+.logo{font-weight:900;letter-spacing:-2px;font-size:48px}.logo span{color:var(--gold)}.sublogo{letter-spacing:6px;color:var(--gold);font-size:14px;font-weight:800;margin-top:-7px}
+.arrowmark{color:var(--gold);font-size:40px;vertical-align:8px}.tag{font-family:Georgia,serif;font-style:italic;font-size:24px;line-height:1.25;margin:26px 0}
+.city{height:170px;margin:0 -24px;background:linear-gradient(180deg,transparent,#071a36),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='220'%3E%3Crect width='500' height='220' fill='%230a2b50'/%3E%3Ccircle cx='360' cy='95' r='42' fill='%23f2bd4b' opacity='.35'/%3E%3Cg fill='%231b426c'%3E%3Crect x='40' y='115' width='45' height='105'/%3E%3Crect x='100' y='80' width='55' height='140'/%3E%3Crect x='170' y='120' width='40' height='100'/%3E%3Crect x='225' y='65' width='62' height='155'/%3E%3Crect x='305' y='105' width='45' height='115'/%3E%3Crect x='365' y='75' width='60' height='145'/%3E%3Crect x='440' y='115' width='40' height='105'/%3E%3C/g%3E%3Cpath d='M20 205 Q180 155 470 60' fill='none' stroke='%23f2bd4b' stroke-width='5'/%3E%3C/svg%3E") center/cover}
+.welcome h2{color:var(--gold2);font-size:28px;margin:0 0 8px}.welcome p{color:#c9d5e5;margin:0 0 20px;line-height:1.5}
+.primary{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#071a36;font-weight:800;border-radius:16px;padding:16px;width:100%;font-size:16px;box-shadow:0 8px 20px #0003}.outline{background:transparent;color:#fff;border:1px solid var(--gold);border-radius:16px;padding:15px;width:100%;font-weight:700;margin-top:12px}.linkbtn{background:none;color:#fff;margin-top:18px}
+.topbar{padding:18px 20px 10px;display:flex;align-items:center;justify-content:space-between;background:var(--white);position:sticky;top:0;z-index:5}.small-logo{font-size:23px;font-weight:900;color:var(--navy)}.small-logo span{color:var(--gold)}.iconbtn{background:#f0f3f8;width:40px;height:40px;border-radius:13px;color:var(--navy);font-size:18px}
+.content{padding:14px 18px}.greeting{font-size:14px;color:var(--muted)}h1{margin:2px 0 16px;font-size:26px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:13px;box-shadow:0 5px 18px #10254408}.balance{background:linear-gradient(135deg,#071a36,#123966);color:#fff;border:0}.balance .muted{color:#b9c8db}.amount{font-size:30px;font-weight:850;margin:7px 0}.positive{color:#65dfad;font-weight:750}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}.quick{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 5px;text-align:center;color:var(--navy);font-size:11px;font-weight:700}.quick b{display:block;font-size:21px;margin-bottom:6px}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:18px 0 10px}.sectionhead h3{margin:0}.sectionhead button{background:none;color:#b17b08;font-weight:700}.opp{display:flex;gap:12px;align-items:center}.avatar{width:48px;height:48px;border-radius:14px;background:#e8f7ef;display:grid;place-items:center;font-size:24px}.opp h4{margin:0 0 4px}.meta{font-size:12px;color:var(--muted)}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.pill{font-size:11px;padding:5px 8px;border-radius:20px;background:#eaf8f1;color:#128454;font-weight:800}.goldpill{background:#fff5da;color:#9a6900}.dangerpill{background:#fff0f0;color:#b13b3b}
+.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);height:76px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;z-index:20;padding-bottom:env(safe-area-inset-bottom)}.navbtn{background:none;color:#8190a5;font-size:10px;font-weight:700}.navbtn b{display:block;font-size:21px;margin-bottom:3px}.navbtn.active{color:var(--navy)}
+.search{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:#fff;outline:none}.chips{display:flex;gap:8px;overflow:auto;padding:10px 0}.chip{white-space:nowrap;padding:8px 13px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12px}.chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chart{height:120px;display:flex;align-items:flex-end;gap:7px;padding-top:15px}.bar{flex:1;background:linear-gradient(180deg,var(--gold),#e6a51c);border-radius:8px 8px 2px 2px}.progress{height:9px;background:#e9edf3;border-radius:10px;overflow:hidden}.progress>i{display:block;height:100%;background:linear-gradient(90deg,#20b879,#79d9ac);border-radius:10px}
+.back{background:none;font-size:24px;color:var(--navy)}.heroimg{height:180px;margin:-14px -18px 15px;background:linear-gradient(180deg,#0b4c67,#d7f1e8);display:flex;align-items:flex-end;padding:18px;color:#fff;font-weight:900;font-size:23px}
+.detail h1{margin-bottom:5px}.bigbtn{margin-top:15px}.input{width:100%;padding:14px;border:1px solid var(--line);border-radius:13px;margin:8px 0;background:#fff}
+.learnitem,.notif{display:flex;gap:13px;align-items:flex-start}.learnicon,.notificon{width:43px;height:43px;border-radius:13px;background:#edf2fa;display:grid;place-items:center;font-size:19px;flex:none}.learnitem h4,.notif h4{margin:0 0 4px}.learnitem p,.notif p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
+.profilehead{background:linear-gradient(135deg,#071a36,#123966);color:#fff;text-align:center;padding:28px 18px;border-radius:0 0 25px 25px}.profilepic{width:72px;height:72px;border-radius:50%;margin:auto;background:linear-gradient(135deg,#ffd98a,#d9a33a);display:grid;place-items:center;color:#071a36;font-size:27px;font-weight:900;border:3px solid #fff}.menu{display:flex;align-items:center;justify-content:space-between;padding:16px 3px;border-bottom:1px solid var(--line)}.menu:last-child{border:0}.menu span{display:flex;gap:12px;align-items:center}.menu b{font-size:18px}
+.modal{display:none;position:fixed;inset:0;background:#071a3688;z-index:50;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:min(430px,100%);border-radius:24px 24px 0 0;padding:22px 20px 30px}.close{float:right;background:#eef1f6;border-radius:50%;width:34px;height:34px}.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#071a36;color:#fff;padding:12px 17px;border-radius:12px;z-index:100;display:none;font-size:13px}.toast.show{display:block}
+@media(min-width:700px){body{padding:20px 0}.app{min-height:850px;border-radius:28px}.bottomnav{position:absolute;border-radius:0 0 28px 28px}.screen{min-height:850px}}
+</style>
+</head>
+<body>
+<div class="app">
+<section id="welcome" class="screen active welcome">
+  <div>
+    <div class="logo"><span class="arrowmark">↗</span>NEXORA</div><div class="sublogo">INVESTMENTS</div>
+    <div class="tag">“Investing in Ideas.<br>Building Better Futures.”</div>
+    <div class="city"></div>
+  </div>
+  <div>
+    <h2>Welcome to Nexora</h2><p>Your partner in smart investments and sustainable growth.</p>
+    <button class="primary" onclick="show('login')">Sign In&nbsp; →</button>
+    <button class="outline" onclick="show('dashboard')">Create Account</button>
+    <button class="linkbtn" onclick="show('dashboard')">Continue as Guest&nbsp; →</button>
+  </div>
+</section>
+
+<section id="login" class="screen">
+  <div class="topbar"><button class="back" onclick="show('welcome')">‹</button><div class="small-logo">NEX<span>O</span>RA</div><span></span></div>
+  <div class="content">
+    <div style="padding-top:30px"><h1>Welcome back 👋</h1><p class="meta">Sign in to manage your Nexora account.</p>
+    <label class="meta">Email address</label><input class="input" placeholder="you@example.com">
+    <label class="meta">Password</label><input class="input" type="password" placeholder="••••••••">
+    <div class="row"><label style="font-size:12px"><input type="checkbox"> Remember me</label><button onclick="toast('Password recovery is a demo feature')" style="background:none;color:#a87508;font-size:12px;font-weight:700">Forgot password?</button></div>
+    <button class="primary bigbtn" onclick="show('dashboard');toast('Signed in successfully')">Sign In</button>
+    <p style="text-align:center;color:var(--muted);font-size:13px">Demo account — no real money or transactions.</p>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard" class="screen">
+  <div class="topbar"><div><div class="greeting">Good morning,</div><h1 style="margin:0">Binta 👋</h1></div><button class="iconbtn" onclick="show('notifications')">🔔</button></div>
+  <div class="content">
+    <div class="card balance"><div class="muted">Total Portfolio Value</div><div class="amount">D2,450,000</div><div class="positive">↑ 12.5% &nbsp; +D271,000 this month</div><div class="chart"><i class="bar" style="height:35%"></i><i class="bar" style="height:47%"></i><i class="bar" style="height:42%"></i><i class="bar" style="height:62%"></i><i class="bar" style="height:58%"></i><i class="bar" style="height:78%"></i><i class="bar" style="height:92%"></i></div></div>
+    <div class="grid4">
+      <button class="quick" onclick="show('opportunities')"><b>📈</b>Invest</button><button class="quick" onclick="show('portfolio')"><b>💼</b>Portfolio</button><button class="quick" onclick="show('learn')"><b>📚</b>Learn</button><button class="quick" onclick="toast('Support is available in Profile')"><b>🎧</b>Support</button>
+    </div>
+    <div class="sectionhead"><h3>Recent Activity</h3><button onclick="show('notifications')">View all</button></div>
+    <div class="card"><div class="row"><div class="opp"><div class="avatar">↗</div><div><h4>Investment return received</h4><div class="meta">2 Oct 2026</div></div></div><strong class="positive">+D45,000</strong></div></div>
+    <div class="card" onclick="show('opportunities')"><div class="opp"><div class="avatar">🌱</div><div><h4>New opportunity available</h4><div class="meta">GreenTech Solutions · Clean Energy</div></div><span>›</span></div></div>
+  </div>
+</section>
+
+<section id="opportunities" class="screen">
+  <div class="topbar"><div class="small-logo">Investment Opportunities</div><button class="iconbtn" onclick="show('dashboard')">⌂</button></div>
+  <div class="content"><input class="search" placeholder="⌕  Search businesses, projects or industries..."><div class="chips"><button class="chip active" onclick="filterChip(this)">All</button><button class="chip" onclick="filterChip(this)">Technology</button><button class="chip" onclick="filterChip(this)">Agriculture</button><button class="chip" onclick="filterChip(this)">Health</button></div>
+    <div class="card" onclick="show('detail')"><div class="opp"><div class="avatar">🌱</div><div style="flex:1"><div class="row"><h4>GreenTech Solutions</h4><span class="pill">Clean Energy</span></div><div class="meta">Renewable energy solutions</div></div><span>›</span></div><div class="row" style="margin-top:14px"><div><div class="meta">Expected Return</div><b>15% – 20%</b></div><div><div class="meta">Risk Level</div><b class="goldpill">Medium</b></div><div><div class="meta">Amount Needed</div><b>D2M</b></div></div></div>
+    <div class="card"><div class="opp"><div class="avatar">⚕️</div><div style="flex:1"><h4>HealthPlus Pharma</h4><div class="meta">Affordable healthcare products</div></div><span>›</span></div><div class="row" style="margin-top:14px"><div><div class="meta">Expected Return</div><b>12% – 18%</b></div><div><div class="meta">Risk Level</div><b class="pill">Low</b></div><div><div class="meta">Amount Needed</div><b>D3.5M</b></div></div></div>
+    <div class="card"><div class="opp"><div class="avatar">🌾</div><div style="flex:1"><h4>AgriGrow Farms</h4><div class="meta">Modern farming & food production</div></div><span>›</span></div><div class="row" style="margin-top:14px"><div><div class="meta">Expected Return</div><b>14% – 22%</b></div><div><div class="meta">Risk Level</div><b class="goldpill">Medium</b></div><div><div class="meta">Amount Needed</div><b>D1.8M</b></div></div></div>
+  </div>
+</section>
+
+<section id="detail" class="screen detail">
+  <div class="topbar"><button class="back" onclick="show('opportunities')">‹</button><div class="small-logo">Opportunity</div><button class="iconbtn" onclick="toast('Saved to favourites ♥')">♡</button></div>
+  <div class="content"><div class="heroimg">🌱 GreenTech Solutions</div><div class="row"><div><h1>GreenTech Solutions</h1><div class="meta">Renewable energy · The Gambia</div></div><span class="pill">Clean Energy</span></div>
+  <div class="card" style="margin-top:15px"><div class="row"><div><div class="meta">Expected Return</div><b>15% – 20%</b></div><div><div class="meta">Risk Level</div><b style="color:#a87508">Medium</b></div><div><div class="meta">Amount Needed</div><b>D2,000,000</b></div></div></div>
+  <div class="sectionhead"><h3>Funding Progress</h3><b>68%</b></div><div class="progress"><i style="width:68%"></i></div><p class="meta">D1,360,000 raised out of D2,000,000</p>
+  <div class="sectionhead"><h3>About the Business</h3></div><div class="card"><p style="line-height:1.6;margin:0;color:#52637a">GreenTech Solutions provides affordable and sustainable renewable energy solutions for homes and small businesses. The company aims to reduce energy costs and support a greener future.</p></div>
+  <button class="primary bigbtn" onclick="openInvest()">Invest in this opportunity</button>
+  <p class="meta" style="text-align:center">Investment returns are not guaranteed. This is a school-project simulation.</p>
+  </div>
+</section>
+
+<section id="portfolio" class="screen">
+  <div class="topbar"><div class="small-logo">My Portfolio</div><button class="iconbtn" onclick="toast('Portfolio report ready in this demo')">↗</button></div>
+  <div class="content"><div class="card"><div class="row"><div><div class="meta">Total Invested</div><h2>D2,000,000</h2></div><div><div class="meta">Current Value</div><h2>D2,450,000</h2><span class="positive">↑ 22.5%</span></div></div></div>
+  <div class="sectionhead"><h3>Current Investments</h3><button>Past</button></div>
+  <div class="card"><div class="opp"><div class="avatar">🌱</div><div style="flex:1"><h4>GreenTech Solutions</h4><div class="meta">Clean Energy · D750,000</div></div><span class="pill">On Track</span></div><div class="progress" style="margin-top:12px"><i style="width:78%"></i></div></div>
+  <div class="card"><div class="opp"><div class="avatar">⚕️</div><div style="flex:1"><h4>HealthPlus Pharma</h4><div class="meta">Healthcare · D600,000</div></div><span class="pill">On Track</span></div></div>
+  <div class="card"><div class="opp"><div class="avatar">🌾</div><div style="flex:1"><h4>AgriGrow Farms</h4><div class="meta">Agriculture · D650,000</div></div><span class="pill">On Track</span></div></div>
+  </div>
+</section>
+
+<section id="learn" class="screen">
+  <div class="topbar"><div><div class="greeting">Build your knowledge.</div><div class="small-logo">Learn</div></div><span>📖</span></div>
+  <div class="content"><div class="chips"><button class="chip active" onclick="filterChip(this)">All</button><button class="chip" onclick="filterChip(this)">Basics</button><button class="chip" onclick="filterChip(this)">Risk</button><button class="chip" onclick="filterChip(this)">Diversification</button></div>
+  <div class="card learnitem"><div class="learnicon">▣</div><div><h4>What is Investing?</h4><p>Learn the basics of investing and how it works.</p><button class="sectionhead" style="margin:8px 0 0;background:none;color:#a87508;font-weight:800" onclick="toast('Lesson opened')">Read more →</button></div></div>
+  <div class="card learnitem"><div class="learnicon">⚠</div><div><h4>Understanding Risk</h4><p>What risks exist and how to manage them responsibly.</p></div></div>
+  <div class="card learnitem"><div class="learnicon">✣</div><div><h4>Diversification</h4><p>Why spreading investments across opportunities matters.</p></div></div>
+  <div class="card learnitem"><div class="learnicon">♡</div><div><h4>Responsible Investing</h4><p>Investing with a long-term and responsible mindset.</p></div></div>
+  </div>
+</section>
+
+<section id="notifications" class="screen">
+  <div class="topbar"><div class="small-logo">Notifications</div><button class="iconbtn" onclick="toast('All notifications marked as read')">✓</button></div>
+  <div class="content">
+  <div class="card notif"><div class="notificon">🌱</div><div><h4>Investment Update</h4><p>GreenTech Solutions has reached 68% of its funding goal.</p><div class="meta">2h ago</div></div></div>
+  <div class="card notif"><div class="notificon">📊</div><div><h4>Portfolio Update</h4><p>Your investment in HealthPlus Pharma has returned 12.7% this month.</p><div class="meta">5h ago</div></div></div>
+  <div class="card notif"><div class="notificon">💡</div><div><h4>New Opportunity</h4><p>A new investment opportunity is now available for review.</p><div class="meta">1d ago</div></div></div>
+  <div class="card notif"><div class="notificon">📢</div><div><h4>Announcement</h4><p>Scheduled maintenance will take place tonight.</p><div class="meta">2d ago</div></div></div>
+  </div>
+</section>
+
+<section id="profile" class="screen">
+  <div class="profilehead"><div class="profilepic">BS</div><h2 style="margin:10px 0 3px">Binta Sanneh</h2><div style="opacity:.8;font-size:13px">Verified Account</div></div>
+  <div class="content"><div class="card" style="padding:8px 16px"><div class="menu"><span>👤 Account Information</span><b>›</b></div><div class="menu"><span>🔒 Security & Privacy</span><b>›</b></div><div class="menu"><span>📄 Statements & Reports</span><b>›</b></div><div class="menu" onclick="toast('Customer support is a demo feature')"><span>🎧 Customer Support</span><b>›</b></div><div class="menu"><span>⚙️ Settings</span><b>›</b></div><div class="menu" onclick="show('welcome')"><span style="color:#c84444">↪ Log Out</span><b>›</b></div></div></div>
+</section>
+
+<nav class="bottomnav" id="nav" style="display:none">
+  <button class="navbtn active" data-screen="dashboard" onclick="show('dashboard')"><b>⌂</b>Home</button>
+  <button class="navbtn" data-screen="opportunities" onclick="show('opportunities')"><b>↗</b>Invest</button>
+  <button class="navbtn" data-screen="portfolio" onclick="show('portfolio')"><b>▣</b>Portfolio</button>
+  <button class="navbtn" data-screen="learn" onclick="show('learn')"><b>▤</b>Learn</button>
+  <button class="navbtn" data-screen="profile" onclick="show('profile')"><b>◉</b>Profile</button>
+</nav>
+
+<div class="modal" id="investModal"><div class="sheet"><button class="close" onclick="closeInvest()">×</button><h2>Demo Investment</h2><p class="meta">GreenTech Solutions · simulated transaction</p><label class="meta">Amount to invest</label><input id="investAmount" class="input" value="50000" type="number"><div class="card"><div class="row"><span>Demo balance</span><b>D500,000</b></div><div class="row" style="margin-top:9px"><span>Selected amount</span><b id="amountLabel">D50,000</b></div></div><button class="primary" onclick="demoInvest()">Confirm Demo Investment</button><p class="meta" style="text-align:center;margin-bottom:0">No real money is moved.</p></div></div>
+<div class="toast" id="toast"></div>
+</div>
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+function show(id){
+ screens.forEach(s=>s.classList.toggle('active',s.id===id));
+ const nav=document.getElementById('nav');
+ const publicScreens=['welcome','login'];
+ nav.style.display=publicScreens.includes(id)?'none':'flex';
+ document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+ window.scrollTo(0,0);
+}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+function openInvest(){document.getElementById('investModal').classList.add('show')}
+function closeInvest(){document.getElementById('investModal').classList.remove('show')}
+function filterChip(el){
+  el.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  toast(el.textContent+' selected');
+}
+function demoInvest(){const n=Number(document.getElementById('investAmount').value||0);if(n<=0){toast('Enter a valid demo amount');return}closeInvest();toast('Demo investment submitted successfully ✓');show('portfolio')}
+document.getElementById('investAmount').addEventListener('input',e=>document.getElementById('amountLabel').textContent='D'+Number(e.target.value||0).toLocaleString());
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script></body>
+</html>
